@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.climaapp.RegistroActivity
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
             if (user == "admin" && pass == "1234") {
                 startActivity(Intent(this, ListaActivity::class.java))
+                finish()
             } else {
                 Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
             }
@@ -35,4 +35,5 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
+
 

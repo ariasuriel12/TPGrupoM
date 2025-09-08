@@ -9,9 +9,10 @@ class DetalleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle)
 
-        val nombre = intent.getStringExtra("nombre")
-
         val tvDetalle = findViewById<TextView>(R.id.tvDetalle)
-        tvDetalle.text = "Mostrando datos completos de: $nombre"
+
+        // Obtener el dato enviado desde ListaActivity
+        val nombre = intent.getStringExtra("nombre")
+        tvDetalle.text = nombre
     }
 }

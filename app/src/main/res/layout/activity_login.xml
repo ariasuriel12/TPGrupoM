@@ -1,34 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="24dp"
+android:gravity="center">
+
+<EditText
+    android:id="@+id/etUser"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:hint="Usuario"/>
 
-    <EditText
-        android:id="@+id/etUser"
-        android:hint="Usuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+<EditText
+    android:id="@+id/etPass"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Contraseña"
+    android:inputType="textPassword"/>
 
-    <EditText
-        android:id="@+id/etPass"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+<Button
+    android:id="@+id/btnLogin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Login"
+    android:layout_marginTop="16dp"/>
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:text="Ingresar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/txtRegister"
-        android:text="Registrarse"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_marginTop="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+<TextView
+    android:id="@+id/txtRegister"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Registrarse"
+    android:textColor="@android:color/holo_blue_dark"
+    android:layout_marginTop="16dp"/>
 </LinearLayout>
+

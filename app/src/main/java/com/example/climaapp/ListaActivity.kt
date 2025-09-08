@@ -6,22 +6,26 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 
-class ListaActivity  : AppCompatActivity() {
-    private val elementos = listOf("Elemento 1", "Elemento 2", "Elemento 3")
-
+class ListaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista)
 
-        val listView = findViewById<ListView>(R.id.listView)
+        // Lista de elementos de ejemplo
+        val elementos = arrayOf("Elemento 1", "Elemento 2", "Elemento 3", "Elemento 4")
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item1, elementos)
+        // Inicializar ListView y adapter
+        val listView = findViewById<ListView>(R.id.listView)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, elementos)
         listView.adapter = adapter
 
-        listView.setOnItemClickListener { , , position,  ->
+        // Listener de click en cada elemento
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val nombreElemento = elementos[position]
             val intent = Intent(this, DetalleActivity::class.java)
-            intent.putExtra("nombre", elementos[position])
+            intent.putExtra("nombre", nombreElemento) // enviar dato a DetalleActivity
             startActivity(intent)
         }
     }
 }
+
