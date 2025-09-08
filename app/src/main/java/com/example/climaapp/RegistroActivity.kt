@@ -11,19 +11,20 @@ class RegistroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
 
-        val etUser = findViewById<EditText>(R.id.etNewUser)
-        val etPass = findViewById<EditText>(R.id.etNewPass)
-        val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val etUser = findViewById<EditText>(R.id.etRegistroUser)
+        val etPass = findViewById<EditText>(R.id.etRegistroPass)
+        val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
 
-        btnRegister.setOnClickListener {
+        btnRegistrar.setOnClickListener {
             val user = etUser.text.toString()
             val pass = etPass.text.toString()
 
-            if (user.isNotEmpty() && pass.isNotEmpty()) {
-                Toast.makeText(this, "Usuario $user registrado con éxito", Toast.LENGTH_SHORT).show()
-                finish() // vuelve al login
+            if(user.isEmpty() || pass.isEmpty()) {
+                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Complete los campos", Toast.LENGTH_SHORT).show()
+                // Aquí podrías guardar los datos en SharedPreferences, DB, etc.
+                Toast.makeText(this, "Usuario $user registrado correctamente", Toast.LENGTH_SHORT).show()
+                finish() // Cierra RegistroActivity y vuelve a LoginActivity
             }
         }
     }
