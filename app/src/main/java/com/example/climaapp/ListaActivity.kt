@@ -18,9 +18,10 @@ class ListaActivity  : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item1, elementos)
         listView.adapter = adapter
 
-        listView.setOnItemClickListener { , , position,  ->
-            val intent = Intent(this, DetalleActivity::class.java)
-            intent.putExtra("nombre", elementos[position])
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val intent = Intent(this@TuActivity, DetalleActivity::class.java).apply {
+                putExtra("nombre", elementos[position])
+            }
             startActivity(intent)
         }
     }
