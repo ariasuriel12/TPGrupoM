@@ -1,6 +1,4 @@
--APP CLIMA
--GRUPO M
+# ☁️ App Clima - Grupo M
 
-Arias Uriel :  Login / Registro de nuevo usuario
-
-Parada Enzo:  Lista con los datos principales de los elementos / Datos completos de un elemento
+* **Uriel Arias**: 👤 Login y Registro de nuevo usuario.
+* **Enzo Parada**: 📋 Lista con los datos principales de los elementos y detalles de un elemento.
