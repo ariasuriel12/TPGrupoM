@@ -13,14 +13,18 @@ class RegistroActivity : AppCompatActivity() {
 
         val etUser = findViewById<EditText>(R.id.etRegistroUser)
         val etPass = findViewById<EditText>(R.id.etRegistroPass)
+        val etConfirmPass = findViewById<EditText>(R.id.etConfirmPass)
         val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
 
         btnRegistrar.setOnClickListener {
             val user = etUser.text.toString()
             val pass = etPass.text.toString()
+            val confirmPass = etConfirmPass.text.toString()
 
             if(user.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+            }else if(pass != confirmPass){
+                Toast.makeText(this,"Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
             } else {
                 // Aquí podrías guardar los datos en SharedPreferences, DB, etc.
                 Toast.makeText(this, "Usuario $user registrado correctamente", Toast.LENGTH_SHORT).show()

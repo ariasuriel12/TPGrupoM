@@ -20,12 +20,22 @@
         android:hint="Usuario" />
 
     <EditText
-        android:id="@+id/etRegistroPass"
+        android:id="@+id/etConfirmPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
         android:inputType="textPassword"
         android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/etRegistroPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Repita Su Contraseña"
+        android:inputType="textPassword"
+        android:layout_marginTop="16dp" />
+
+
 
     <Button
         android:id="@+id/btnRegistrar"
