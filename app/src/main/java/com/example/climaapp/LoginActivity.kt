@@ -16,9 +16,20 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
         sharedPref = getSharedPreferences("user_data", MODE_PRIVATE)
+
+        val shouldSkipLogin = sharedPref.getBoolean("is_logged_in", false)
+
+        if (shouldSkipLogin) {
+
+            startActivity(Intent(this, ListaActivity::class.java))
+            finish()
+            return
+        }
+
+        setContentView(R.layout.activity_login)
+
 
         val etUser = findViewById<EditText>(R.id.etUser)
         val etPass = findViewById<EditText>(R.id.etPass)
@@ -26,24 +37,28 @@ class LoginActivity : AppCompatActivity() {
         val txtRegister = findViewById<TextView>(R.id.txtRegister)
         val cbRememberMe = findViewById<CheckBox>(R.id.cbRememberMe)
 
-        val savedUserName = sharedPref.getString("username", null)
-        if(savedUserName != null){
-            etUser.setText(savedUserName)
-            cbRememberMe.isChecked = true;
+        val savedUserName: String? = sharedPref.getString("username", null)
 
+        if (!savedUserName.isNullOrEmpty()) {
+            etUser.setText(savedUserName)
+            cbRememberMe.isChecked = true
         }
+
         btnLogin.setOnClickListener {
             val user = etUser.text.toString()
             val pass = etPass.text.toString()
 
             if (user == "admin" && pass == "1234") {
-                val editor =sharedPref.edit()
+                val editor = sharedPref.edit()
 
-                if(cbRememberMe.isChecked){
+                if (cbRememberMe.isChecked) {
                     editor.putString("username", user)
+                    editor.putBoolean("is_logged_in", true)
                 } else {
                     editor.remove("username")
+                    editor.remove("is_logged_in")
                 }
+
                 editor.apply()
 
                 startActivity(Intent(this, ListaActivity::class.java))
@@ -58,4 +73,3 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
-
