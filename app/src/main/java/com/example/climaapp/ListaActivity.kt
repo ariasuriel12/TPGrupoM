@@ -50,6 +50,7 @@ class ListaActivity : AppCompatActivity() {
             intent.putExtra("nombre", climas[position])
             startActivity(intent)
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
