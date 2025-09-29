@@ -20,16 +20,17 @@ class ListaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista)
 
-        // ---------------- Configurar Toolbar ----------------
+        val prefs = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+
+        val nombreUsuario = prefs.getString("username", "Usuario")
+
+        Toast.makeText(this, "¡Bienvenido, $nombreUsuario! ☀️", Toast.LENGTH_LONG).show()
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        // Mostrar flecha de retroceso
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        // -----------------------------------------------------
 
-        // ---------------- Climas hardcodeados ----------------
         climas = listOf(
             "☀️ Soleado - 28°C",
             "⛅ Parcialmente nublado - 24°C",
@@ -44,7 +45,6 @@ class ListaActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, climas)
         listView.adapter = adapter
 
-        // ---------------- Click en item para abrir detalle ----------------
         listView.setOnItemClickListener { _, _, position, _ ->
             val intent = Intent(this, DetalleActivity::class.java)
             intent.putExtra("nombre", climas[position])
@@ -70,6 +70,10 @@ class ListaActivity : AppCompatActivity() {
             }
             R.id.action_logout -> {
                 val prefs = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+
+                val nombreUsuario = prefs.getString("username", "Usuario")
+
+                Toast.makeText(this, "¡Hasta pronto, $nombreUsuario! 👋", Toast.LENGTH_LONG).show()
                 prefs.edit()
                     .putBoolean("remember", false)
                     .remove("username")
