@@ -6,7 +6,7 @@
     android:background="@android:color/black"
     android:padding="0dp">
 
-    <!-- Toolbar -->
+    <!-- 🔹 Toolbar superior -->
     <include
         android:id="@+id/toolbar"
         layout="@layout/primary_toolbar"
@@ -16,16 +16,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- ListView para la lista de climas -->
+    <!-- 🔹 Lista de provincias -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@android:color/white"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:clipToPadding="false"
+
+
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:divider="@android:color/black"
-        android:dividerHeight="1dp"
-        android:background="@android:color/white"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
