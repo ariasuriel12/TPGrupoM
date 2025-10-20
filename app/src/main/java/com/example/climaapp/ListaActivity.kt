@@ -14,43 +14,58 @@ import androidx.appcompat.widget.Toolbar
 class ListaActivity : AppCompatActivity() {
 
     private lateinit var listView: ListView
-    private lateinit var climas: List<String>
+    private lateinit var provincias: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista)
 
         val prefs = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-
         val nombreUsuario = prefs.getString("username", "Usuario")
 
         Toast.makeText(this, "¡Bienvenido, $nombreUsuario! ☀️", Toast.LENGTH_LONG).show()
+
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        climas = listOf(
-            "☀️ Soleado - 28°C",
-            "⛅ Parcialmente nublado - 24°C",
-            "🌧️ Lluvias aisladas - 19°C",
-            "🌩️ Tormentas - 21°C",
-            "❄️ Nevando - -2°C",
-            "🌫️ Niebla - 12°C",
-            "💨 Viento fuerte - 15°C"
+        // 🔹 Lista de provincias argentinas (para consultar el clima)
+        provincias = listOf(
+            "Buenos Aires",
+            "Córdoba",
+            "Santa Fe",
+            "Mendoza",
+            "Salta",
+            "Tucumán",
+            "Entre Ríos",
+            "San Juan",
+            "Corrientes",
+            "Misiones",
+            "Chaco",
+            "Formosa",
+            "La Rioja",
+            "San Luis",
+            "Jujuy",
+            "Neuquén",
+            "Río Negro",
+            "Chubut",
+            "Santa Cruz",
+            "Tierra del Fuego"
         )
 
+        // 🔹 Configurar la lista
         listView = findViewById(R.id.listView)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, climas)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, provincias)
         listView.adapter = adapter
 
+        // 🔹 Al hacer clic, abrir DetalleActivity con el nombre de la provincia
         listView.setOnItemClickListener { _, _, position, _ ->
+            val provinciaSeleccionada = provincias[position]
             val intent = Intent(this, DetalleActivity::class.java)
-            intent.putExtra("nombre", climas[position])
+            intent.putExtra("provincia", provinciaSeleccionada)
             startActivity(intent)
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -70,16 +85,13 @@ class ListaActivity : AppCompatActivity() {
             }
             R.id.action_logout -> {
                 val prefs = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-
                 val nombreUsuario = prefs.getString("username", "Usuario")
-
                 Toast.makeText(this, "¡Hasta pronto, $nombreUsuario! 👋", Toast.LENGTH_LONG).show()
                 prefs.edit()
                     .putBoolean("remember", false)
                     .remove("username")
                     .remove("password")
                     .apply()
-
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
                 true
