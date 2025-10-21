@@ -14,7 +14,6 @@ import retrofit2.Response
 
 class DetalleActivity : AppCompatActivity() {
 
-    // 🔑 Tu API key de Weatherstack
     private val apiKey = "be74d0c634efc8f470b5786d304f509c"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +26,6 @@ class DetalleActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        // Referencias a vistas
         val tvCiudad = findViewById<TextView>(R.id.tvCiudad)
         val tvTemperatura = findViewById<TextView>(R.id.tvTemperatura)
         val tvDescripcion = findViewById<TextView>(R.id.tvDescripcion)

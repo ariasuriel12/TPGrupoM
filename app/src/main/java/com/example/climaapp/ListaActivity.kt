@@ -5,16 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
 class ListaActivity : AppCompatActivity() {
-
-    private lateinit var listView: ListView
-    private lateinit var provincias: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,41 +25,11 @@ class ListaActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        // 🔹 Lista de provincias argentinas (para consultar el clima)
-        provincias = listOf(
-            "Buenos Aires",
-            "Córdoba",
-            "Santa Fe",
-            "Mendoza",
-            "Salta",
-            "Tucumán",
-            "Entre Ríos",
-            "San Juan",
-            "Corrientes",
-            "Misiones",
-            "Chaco",
-            "Formosa",
-            "La Rioja",
-            "San Luis",
-            "Jujuy",
-            "Neuquén",
-            "Río Negro",
-            "Chubut",
-            "Santa Cruz",
-            "Tierra del Fuego"
-        )
-
-        // 🔹 Configurar la lista
-        listView = findViewById(R.id.listView)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, provincias)
-        listView.adapter = adapter
-
-        // 🔹 Al hacer clic, abrir DetalleActivity con el nombre de la provincia
-        listView.setOnItemClickListener { _, _, position, _ ->
-            val provinciaSeleccionada = provincias[position]
-            val intent = Intent(this, DetalleActivity::class.java)
-            intent.putExtra("provincia", provinciaSeleccionada)
-            startActivity(intent)
+        // 💡 Lógica para añadir el Fragment a la Activity
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ListaFragment()) // <-- Uso de ListaFragment
+                .commit()
         }
     }
 
@@ -74,6 +39,7 @@ class ListaActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // La lógica del menú (logout, settings) se mantiene en la Activity
         return when (item.itemId) {
             android.R.id.home -> {
                 finish()
@@ -92,6 +58,7 @@ class ListaActivity : AppCompatActivity() {
                     .remove("username")
                     .remove("password")
                     .apply()
+                // Asume que 'LoginActivity' es la pantalla de inicio de sesión
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
                 true
