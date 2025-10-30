@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="?android:attr/colorBackground">
 
-    <!-- Toolbar fija arriba -->
     <include
         android:id="@+id/toolbar"
         layout="@layout/primary_toolbar"
@@ -13,7 +12,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Contenedor centrado de login -->
     <LinearLayout
         android:id="@+id/centerContainer"
         android:orientation="vertical"
@@ -24,26 +22,52 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:padding="24dp">
 
-        <EditText
-            android:id="@+id/etUser"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Usuario"/>
+            android:hint="Usuario"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
-        <EditText
-            android:id="@+id/etPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:layout_marginTop="16dp"/>
+            app:startIconDrawable="@drawable/ic_person"
+            app:startIconContentDescription="Icono de usuario">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/tilPass"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:hint="Contraseña"
+           android:layout_marginTop="16dp"
+           app:passwordToggleEnabled="true"
+           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+           app:startIconDrawable="@drawable/ic_lock_material"
+           app:startIconContentDescription="Icono de candado">
+
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/etPass"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:inputType="textPassword" />
+
+       </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <CheckBox
             android:id="@+id/chkRemember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Recordar usuario"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:textColor="@color/color_primary_base"
+            android:buttonTint="@color/color_primary_base"/>
 
         <Button
             android:id="@+id/btnLogin"
@@ -57,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Registrarse"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/color_primary_base"
             android:layout_marginTop="16dp"/>
     </LinearLayout>
 

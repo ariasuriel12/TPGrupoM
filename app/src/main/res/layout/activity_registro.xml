@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="?android:attr/colorBackground">>
 
-    <!-- Toolbar fija arriba -->
     <include
         android:id="@+id/toolbar"
         layout="@layout/primary_toolbar"
@@ -13,7 +12,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Contenedor centrado de registro -->
     <LinearLayout
         android:id="@+id/centerContainer"
         android:orientation="vertical"
@@ -29,29 +27,63 @@
             android:layout_height="wrap_content"
             android:text="Registro de Usuario"
             android:textSize="22sp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="24dp"
+            android:textColor="@color/color_primary_base"/>
 
-        <EditText
-            android:id="@+id/etRegistroUser"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilRegistroUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Usuario" />
+            android:hint="Usuario"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:startIconDrawable="@drawable/ic_person"
+            app:startIconContentDescription="Icono de usuario">
 
-        <EditText
-            android:id="@+id/etRegistroPass"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRegistroUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilRegistroPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:startIconDrawable="@drawable/ic_lock_material"
+            app:startIconContentDescription="Icono de candado">
 
-        <EditText
-            android:id="@+id/etRegistroConfirmPass"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRegistroPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilRegistroConfirmPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:layout_marginTop="16dp" />
+            android:hint="Confirmar Contraseña"
+            android:layout_marginTop="16dp"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:startIconDrawable="@drawable/ic_lock_material"
+            app:startIconContentDescription="Icono de candado">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRegistroConfirmPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnRegistrar"
