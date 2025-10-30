@@ -26,22 +26,18 @@ class LoginActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         val isRemembered = prefs.getBoolean("remember", false)
 
-        // ---------------- Saltar login si ya está guardado ----------------
         if (isRemembered) {
             startActivity(Intent(this, ListaActivity::class.java))
             finish()
             return
         }
-        // -------------------------------------------------------------------
 
         setContentView(R.layout.activity_login)
 
-        // ---------------- Configurar Toolbar ----------------
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        // -----------------------------------------------------
 
         etUser = findViewById(R.id.etUser)
         etPass = findViewById(R.id.etPass)
@@ -49,14 +45,12 @@ class LoginActivity : AppCompatActivity() {
         txtRegister = findViewById(R.id.txtRegister)
         chkRemember = findViewById(R.id.chkRemember)
 
-        // ---------------- Cargar usuario y contraseña guardados (si existen) ----------------
         val savedUser = prefs.getString("username", "")
-        val savedPass = prefs.getString("password", "")
+        val savedPass = if (isRemembered) prefs.getString("password", "") else ""
 
         etUser.setText(savedUser)
         etPass.setText(savedPass)
         chkRemember.isChecked = false
-        // --------------------------------------------------------------------------
 
         val db = DatabaseProvider.getDatabase(this)
         val userDao = db.userDao()
@@ -71,16 +65,17 @@ class LoginActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     val user = userDao.login(username, password)
                     if (user != null) {
-                        // Guardar SharedPreferences si el usuario quiere "recordar"
+                        val editor = prefs.edit()
+                        editor.putString("username", username)
                         if (chkRemember.isChecked) {
                             prefs.edit()
-                                .putString("username", username)
-                                .putString("password", password)
-                                .putBoolean("remember", true)
-                                .apply()
+                                editor.putString("password", password)
+                                editor.putBoolean("remember", true)
                         } else {
-                            prefs.edit().clear().apply()
+                            editor.putBoolean("remember", false)
+                            editor.remove("password")
                         }
+                        editor.apply()
 
                         startActivity(Intent(this@LoginActivity, ListaActivity::class.java))
                         finish()

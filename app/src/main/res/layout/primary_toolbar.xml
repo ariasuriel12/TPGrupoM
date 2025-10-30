@@ -6,38 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
 
-    android:background="?attr/colorPrimary"
-    android:titleTextColor="@color/white"
-
-    >
-
-    <!-- Contenedor centrado -->
+    android:background="?attr/colorPrimary">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <!-- Logo -->
         <ImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/ic_climalogg"
             android:contentDescription="@string/app_name"
-            android:layout_marginEnd="8dp"/>
-
-        <!-- Título personalizado -->
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ClimaApp"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:fontFamily=""/>
-
-    </LinearLayout>
+            android:layout_marginEnd="8dp"
+            app:tint="@color/white" /> <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ClimaApp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        /> </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>
-

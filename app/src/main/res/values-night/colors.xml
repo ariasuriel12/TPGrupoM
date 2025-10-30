@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary_base">#FF6200EE</color>
-    <color name="color_secondary_accent">#FF03DAC5</color>
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
-
-    <color name="background_app">#F5F5F5</color>
-    <color name="background_component">#FFFFFF</color>
-
-    <color name="text_secondary">#757575</color>
-
+    <color name="background_app">@color/black</color>
+    <color name="background_component">#FF121212</color>
+    <color name="color_primary_base">#FF6200EE</color>
+    <color name="text_secondary">#B3FFFFFF</color>
+    <color name="color_secondary_accent">#FF03DAC5</color>
     <color name="color_accent_red">#EB1555</color>
     <color name="color_warning">#FFEB3B</color>
     <color name="color_success">#4CAF50</color>
