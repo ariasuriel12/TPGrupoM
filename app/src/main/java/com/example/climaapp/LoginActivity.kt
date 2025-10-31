@@ -34,11 +34,6 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-
         etUser = findViewById(R.id.etUser)
         etPass = findViewById(R.id.etPass)
         btnLogin = findViewById(R.id.btnLogin)
