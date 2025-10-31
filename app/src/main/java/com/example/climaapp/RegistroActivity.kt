@@ -1,8 +1,10 @@
 package com.example.climaapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -18,8 +20,9 @@ class RegistroActivity : AppCompatActivity() {
 
         val etUser = findViewById<EditText>(R.id.etRegistroUser)
         val etPass = findViewById<EditText>(R.id.etRegistroPass)
-        val etConfirmPass = findViewById<EditText>(R.id.etRegistroConfirmPass) // ¡Asegúrate de que este ID exista en tu XML!
+        val etConfirmPass = findViewById<EditText>(R.id.etRegistroConfirmPass)
         val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
+        val textLogin = findViewById<TextView>(R.id.textLogin)
 
         btnRegistrar.setOnClickListener {
             val username = etUser.text.toString().trim()
@@ -50,7 +53,7 @@ class RegistroActivity : AppCompatActivity() {
                         "Usuario $username registrado correctamente",
                         Toast.LENGTH_SHORT
                     ).show()
-                    finish() // Cierra RegistroActivity y vuelve a LoginActivity
+                    finish()
                 } else {
                     Toast.makeText(
                         this@RegistroActivity,
@@ -59,6 +62,13 @@ class RegistroActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+        }
+        textLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+
+            startActivity(intent)
+
+            finish()
         }
     }
 }
