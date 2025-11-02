@@ -20,6 +20,7 @@ class DetalleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle)
 
+        // Configurar Toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -31,11 +32,12 @@ class DetalleActivity : AppCompatActivity() {
         val tvHumedad = findViewById<TextView>(R.id.tvHumedad)
         val imgIcono = findViewById<ImageView>(R.id.imgIcono)
 
+        // Obtener la provincia desde ListaActivity
         val provincia = intent.getStringExtra("provincia")
         tvCiudad.text = provincia
 
         if (provincia != null) {
-
+            // Llamada a la API
             ApiClient.instance.getWeather(apiKey, provincia)
                 .enqueue(object : Callback<WeatherResponse> {
                     override fun onResponse(

@@ -26,11 +26,13 @@ class LoginActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         val isRemembered = prefs.getBoolean("remember", false)
 
+        // ---------------- Saltar login si ya está guardado ----------------
         if (isRemembered) {
             startActivity(Intent(this, ListaActivity::class.java))
             finish()
             return
         }
+        // -------------------------------------------------------------------
 
         setContentView(R.layout.activity_login)
 
@@ -46,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
         etUser.setText(savedUser)
         etPass.setText(savedPass)
         chkRemember.isChecked = false
+        // --------------------------------------------------------------------------
 
         val db = DatabaseProvider.getDatabase(this)
         val userDao = db.userDao()
@@ -70,7 +73,6 @@ class LoginActivity : AppCompatActivity() {
                             editor.putBoolean("remember", false)
                             editor.remove("password")
                         }
-                        editor.apply()
 
                         startActivity(Intent(this@LoginActivity, ListaActivity::class.java))
                         finish()

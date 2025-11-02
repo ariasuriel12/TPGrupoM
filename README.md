@@ -1,10 +1,17 @@
+# ☁️ TP Grupo M - App Clima ☀️
 
--APP CLIMA
--GRUPO M
+## 🛠️ Tecnologías Utilizadas
 
-Arias Uriel :  Login / Registro de nuevo usuario
+* **Lenguaje de Programación:** Kotlin 📱
+* **Plataforma:** Android
+* **Sistema de Build:** Gradle
+## 🧑‍💻 Integrantes 
 
-Parada Enzo:  Lista con los datos principales de los elementos / Datos completos de un elemento
+### 👤 Arias Uriel:
+Login / Registro de nuevo usuario
+
+### 👤 Parada Enzo: 
+Lista con los datos principales de los elementos / Datos completos de un elemento
 
 
 

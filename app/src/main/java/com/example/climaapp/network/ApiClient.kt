@@ -2,6 +2,7 @@ package com.example.climaapp.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 object ApiClient {
     private const val BASE_URL = "https://api.weatherstack.com/"
 
@@ -14,4 +15,3 @@ object ApiClient {
         retrofit.create(WeatherService::class.java)
     }
 }
-
