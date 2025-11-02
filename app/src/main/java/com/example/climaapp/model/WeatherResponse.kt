@@ -1,8 +1,8 @@
 package com.example.climaapp.model
 
-data class WeatherResponse(
-    val location: Location,
-    val current: Current
+class WeatherResponse(
+val location: Location,
+val current: Current
 )
 
 data class Location(

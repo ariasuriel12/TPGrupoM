@@ -8,7 +8,8 @@
     <color name="background_app">#F5F5F5</color>
     <color name="background_component">#FFFFFF</color>
 
-    <color name="text_secondary">#757575</color>
+
+    <color name="text_secondary">#000000</color>
 
     <color name="color_accent_red">#EB1555</color>
     <color name="color_warning">#FFEB3B</color>
