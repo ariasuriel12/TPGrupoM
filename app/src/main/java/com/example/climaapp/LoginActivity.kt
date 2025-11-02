@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import com.example.climaapp.data.DatabaseProvider
 import kotlinx.coroutines.launch
@@ -31,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
             return
         }
+        // -------------------------------------------------------------------
 
         setContentView(R.layout.activity_login)
 
@@ -41,11 +41,14 @@ class LoginActivity : AppCompatActivity() {
         chkRemember = findViewById(R.id.chkRemember)
 
         val savedUser = prefs.getString("username", "")
+
         val savedPass = if (isRemembered) prefs.getString("password", "") else ""
 
         etUser.setText(savedUser)
         etPass.setText(savedPass)
-        chkRemember.isChecked = false
+
+        // Cargar el estado del CheckBox
+        chkRemember.isChecked = isRemembered
 
         val db = DatabaseProvider.getDatabase(this)
         val userDao = db.userDao()
@@ -60,16 +63,19 @@ class LoginActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     val user = userDao.login(username, password)
                     if (user != null) {
+
                         val editor = prefs.edit()
+
                         editor.putString("username", username)
+
                         if (chkRemember.isChecked) {
-                            prefs.edit()
-                                editor.putString("password", password)
-                                editor.putBoolean("remember", true)
+                            editor.putString("password", password)
+                            editor.putBoolean("remember", true)
                         } else {
                             editor.putBoolean("remember", false)
                             editor.remove("password")
                         }
+
                         editor.apply()
 
                         startActivity(Intent(this@LoginActivity, ListaActivity::class.java))
@@ -86,11 +92,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menubar, menu)
         return true
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
