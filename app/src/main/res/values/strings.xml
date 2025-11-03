@@ -2,4 +2,13 @@
     <string name="app_name">ClimaApp</string>
     <string name="title_activity_login">LoginActivity</string>
 
+    <string name="humidity_label">Humidity</string>
+    <string name="partly_cloudy_key">Partly Cloudy</string>
+    <string name="clear_sky_key">Clear Sky</string>
+    <string name="rain_key">Rain</string>
+    <string name="cloudy_key">Cloudy</string>
+    <string name="light_rain_key">Light Rain</string>
+    <string name="error_api_data">Could not retrieve data</string>
+    <string name="error_api_response">Error: </string>
+    <string name="error_connection">Connection error: </string>
 </resources>

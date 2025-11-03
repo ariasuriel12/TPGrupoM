@@ -16,6 +16,12 @@ class DetalleActivity : AppCompatActivity() {
 
     private val apiKey = "be74d0c634efc8f470b5786d304f509c"
 
+    private lateinit var tvCiudad: TextView
+    private lateinit var tvTemperatura: TextView
+    private lateinit var tvDescripcion: TextView
+    private lateinit var tvHumedad: TextView
+    private lateinit var imgIcono: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle)
@@ -25,46 +31,70 @@ class DetalleActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val tvCiudad = findViewById<TextView>(R.id.tvCiudad)
-        val tvTemperatura = findViewById<TextView>(R.id.tvTemperatura)
-        val tvDescripcion = findViewById<TextView>(R.id.tvDescripcion)
-        val tvHumedad = findViewById<TextView>(R.id.tvHumedad)
-        val imgIcono = findViewById<ImageView>(R.id.imgIcono)
+        tvCiudad = findViewById<TextView>(R.id.tvCiudad)
+        tvTemperatura = findViewById<TextView>(R.id.tvTemperatura)
+        tvDescripcion = findViewById<TextView>(R.id.tvDescripcion)
+        tvHumedad = findViewById<TextView>(R.id.tvHumedad)
+        imgIcono = findViewById<ImageView>(R.id.imgIcono)
 
         val provincia = intent.getStringExtra("provincia")
         tvCiudad.text = provincia
 
         if (provincia != null) {
+            fetchWeatherData(provincia)
+        }
+    }
 
-            ApiClient.instance.getWeather(apiKey, provincia)
-                .enqueue(object : Callback<WeatherResponse> {
-                    override fun onResponse(
-                        call: Call<WeatherResponse>,
-                        response: Response<WeatherResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            val clima = response.body()
-                            if (clima != null) {
-                                tvTemperatura.text = "${clima.current.temperature}°C"
-                                tvDescripcion.text = clima.current.weather_descriptions.firstOrNull() ?: "—"
-                                tvHumedad.text = "Humedad: ${clima.current.humidity}%"
+    private fun fetchWeatherData(provincia: String) {
+        ApiClient.instance.getWeather(apiKey, provincia)
+            .enqueue(object : Callback<WeatherResponse> {
+                override fun onResponse(
+                    call: Call<WeatherResponse>,
+                    response: Response<WeatherResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val clima = response.body()
+                        if (clima != null) {
+                            val apiDescription = clima.current.weather_descriptions.firstOrNull()
+                            val humidityValue = clima.current.humidity
+                            val iconUrl = clima.current.weather_icons.firstOrNull()
 
-                                val iconUrl = clima.current.weather_icons.firstOrNull()
-                                if (iconUrl != null) {
-                                    Picasso.get().load(iconUrl).into(imgIcono)
-                                }
+                            val stringId = getWeatherStringKey(apiDescription)
+                            if (stringId != 0) {
+                                tvDescripcion.text = getString(stringId)
                             } else {
-                                tvDescripcion.text = "No se pudieron obtener datos"
+                                tvDescripcion.text = apiDescription ?: "—"
                             }
-                        } else {
-                            tvDescripcion.text = "Error: ${response.message()}"
-                        }
-                    }
 
-                    override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                        tvDescripcion.text = "Error de conexión: ${t.message}"
+                            tvTemperatura.text = "${clima.current.temperature}°C"
+                            val humedadLabel = getString(R.string.humidity_label)
+                            tvHumedad.text = "$humedadLabel: ${humidityValue}%"
+
+                            if (iconUrl != null) {
+                                Picasso.get().load(iconUrl).into(imgIcono)
+                            }
+
+                        } else {
+                            tvDescripcion.text = getString(R.string.error_api_data)
+                        }
+                    } else {
+                        tvDescripcion.text = getString(R.string.error_api_response) + response.code()
                     }
-                })
+                }
+                override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+                    tvDescripcion.text = getString(R.string.error_connection) + t.message
+                }
+            })
+    }
+
+    private fun getWeatherStringKey(apiDescription: String?): Int {
+
+        return when (apiDescription?.lowercase()?.trim()) {
+            "partly cloudy" -> R.string.partly_cloudy_key
+            "clear", "sunny" -> R.string.clear_sky_key
+            "rain", "light rain" -> R.string.rain_key
+            "cloudy" -> R.string.cloudy_key
+            else -> 0
         }
     }
 

@@ -89,7 +89,6 @@ class LoginActivity : AppCompatActivity() {
                             editor.putBoolean("remember", true)
 
                             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                                // Versiones anteriores a Android 13
                                 Notificaciones.showRememberUserConfirmation(this@LoginActivity)
                             } else {
                                 if (ContextCompat.checkSelfPermission(this@LoginActivity, Manifest.permission.POST_NOTIFICATIONS) ==
@@ -121,7 +120,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // [INTEGRADO] 5. Función para solicitar el permiso (solo para Android 13+)
     private fun askNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) !=

@@ -46,7 +46,7 @@ class ListaFragment: Fragment() {
         )
 
 
-        listView = view.findViewById(R.id.listView) // Asumiendo que el ID del ListView sigue siendo 'listView'
+        listView = view.findViewById(R.id.listView)
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, provincias)
         listView.adapter = adapter
 

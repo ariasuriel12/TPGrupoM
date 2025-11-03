@@ -31,7 +31,7 @@ object Notificaciones {
     @SuppressLint("MissingPermission")
     fun showRememberUserConfirmation(context: Context) {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground) // 🖼️ RECUERDA CAMBIAR ESTE ÍCONO
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("Credenciales Guardadas")
             .setContentText("Tu usuario y contraseña han sido guardados para el próximo inicio de sesión.")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)

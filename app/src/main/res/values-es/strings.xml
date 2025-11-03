@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaApp</string>
+    <string name="title_activity_login">Actividad de Inicio de Sesión</string>
+
+    <string name="humidity_label">Humedad</string>
+    <string name="partly_cloudy_key">Parcialmente Nublado</string>
+    <string name="clear_sky_key">Cielo Despejado</string>
+    <string name="rain_key">Lluvia</string>
+    <string name="cloudy_key">Nublado</string>
+    <string name="light_rain_key">Lluvia Ligera</string>
+    <string name="error_api_data">No se pudieron obtener datos</string>
+    <string name="error_api_response">Error: </string>
+    <string name="error_connection">Error de conexión: </string>
+</resources>
