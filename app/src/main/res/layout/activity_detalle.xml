@@ -7,7 +7,6 @@
     android:background="#6200EE"
     android:padding="16dp">
 
-    tools:context=".DetalleActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -60,7 +59,7 @@
                 android:layout_marginBottom="16dp"
                 android:contentDescription="Icono del clima"
                 tools:src="@drawable/ic_launcher_foreground"
-                app:tint="@color/text_secondary" />
+                app:tint="@null" />
 
             <TextView
                 android:id="@+id/tvDescripcion"
