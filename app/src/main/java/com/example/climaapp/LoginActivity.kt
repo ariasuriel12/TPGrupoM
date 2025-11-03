@@ -1,15 +1,21 @@
 package com.example.climaapp
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.climaapp.data.DatabaseProvider
 import kotlinx.coroutines.launch
+import androidx.activity.result.contract.ActivityResultContracts
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,6 +24,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnLogin: Button
     private lateinit var txtRegister: TextView
     private lateinit var chkRemember: CheckBox
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (!isGranted) {
+                Toast.makeText(this, "Permiso de notificaciones denegado. Algunas confirmaciones no se mostrarán.", Toast.LENGTH_LONG).show()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +43,6 @@ class LoginActivity : AppCompatActivity() {
             finish()
             return
         }
-        // -------------------------------------------------------------------
 
         setContentView(R.layout.activity_login)
 
@@ -44,10 +56,14 @@ class LoginActivity : AppCompatActivity() {
 
         val savedPass = if (isRemembered) prefs.getString("password", "") else ""
 
+        Notificaciones.createNotificationChannel(this)
+
+        askNotificationPermission()
+
+
         etUser.setText(savedUser)
         etPass.setText(savedPass)
 
-        // Cargar el estado del CheckBox
         chkRemember.isChecked = isRemembered
 
         val db = DatabaseProvider.getDatabase(this)
@@ -71,6 +87,19 @@ class LoginActivity : AppCompatActivity() {
                         if (chkRemember.isChecked) {
                             editor.putString("password", password)
                             editor.putBoolean("remember", true)
+
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                                // Versiones anteriores a Android 13
+                                Notificaciones.showRememberUserConfirmation(this@LoginActivity)
+                            } else {
+                                if (ContextCompat.checkSelfPermission(this@LoginActivity, Manifest.permission.POST_NOTIFICATIONS) ==
+                                    PackageManager.PERMISSION_GRANTED) {
+
+                                    Notificaciones.showRememberUserConfirmation(this@LoginActivity)
+                                }
+                            }
+                            // --------------------------------------------------
+
                         } else {
                             editor.putBoolean("remember", false)
                             editor.remove("password")
@@ -89,6 +118,17 @@ class LoginActivity : AppCompatActivity() {
 
         txtRegister.setOnClickListener {
             startActivity(Intent(this, RegistroActivity::class.java))
+        }
+    }
+
+    // [INTEGRADO] 5. Función para solicitar el permiso (solo para Android 13+)
+    private fun askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) !=
+                PackageManager.PERMISSION_GRANTED) {
+
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
         }
     }
 

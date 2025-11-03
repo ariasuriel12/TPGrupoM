@@ -18,10 +18,10 @@ class ListaFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflar el layout que contendrá el ListView
+
         val view = inflater.inflate(R.layout.fragment_lista, container, false)
 
-        // 🔹 Lista de provincias argentinas (la lógica se mantiene aquí)
+
         provincias = listOf(
             "Buenos Aires",
             "Córdoba",
@@ -45,12 +45,12 @@ class ListaFragment: Fragment() {
             "Tierra del Fuego"
         )
 
-        // 🔹 Configurar la lista
+
         listView = view.findViewById(R.id.listView) // Asumiendo que el ID del ListView sigue siendo 'listView'
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, provincias)
         listView.adapter = adapter
 
-        // 🔹 Al hacer clic, abrir DetalleActivity con el nombre de la provincia
+
         listView.setOnItemClickListener { _, _, position, _ ->
             val provinciaSeleccionada = provincias[position]
             val intent = Intent(requireContext(), DetalleActivity::class.java)

@@ -68,5 +68,6 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.picasso:picasso:2.8")
+    implementation("androidx.core:core-ktx:1.12.0")
 
 }
