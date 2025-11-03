@@ -31,24 +31,10 @@ class ListaActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        climas = listOf(
-            "☀️ Soleado - 28°C",
-            "⛅ Parcialmente nublado - 24°C",
-            "🌧️ Lluvias aisladas - 19°C",
-            "🌩️ Tormentas - 21°C",
-            "❄️ Nevando - -2°C",
-            "🌫️ Niebla - 12°C",
-            "💨 Viento fuerte - 15°C"
-        )
-
-        listView = findViewById(R.id.listView)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, climas)
-        listView.adapter = adapter
-
-        listView.setOnItemClickListener { _, _, position, _ ->
-            val intent = Intent(this, DetalleActivity::class.java)
-            intent.putExtra("nombre", climas[position])
-            startActivity(intent)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ListaFragment())
+                .commit()
         }
 
     }

@@ -19,7 +19,7 @@ class ListaFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflar el layout que contendrá el ListView
-        val view = inflater.inflate(R.layout.fragment_lista, container, false) // Puedes renombrar el layout a fragment_lista.xml
+        val view = inflater.inflate(R.layout.fragment_lista, container, false)
 
         // 🔹 Lista de provincias argentinas (la lógica se mantiene aquí)
         provincias = listOf(
