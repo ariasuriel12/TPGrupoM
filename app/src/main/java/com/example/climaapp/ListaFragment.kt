@@ -22,7 +22,6 @@ class ListaFragment: Fragment() {
         val view = inflater.inflate(R.layout.fragment_lista, container, false)
 
         provincias = listOf(
-            // ... (Tus 20 provincias)
             "Buenos Aires",
             "Córdoba",
             "Santa Fe",
